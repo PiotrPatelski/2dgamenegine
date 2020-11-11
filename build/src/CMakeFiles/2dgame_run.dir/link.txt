@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/2dgame_run.dir/Entity.cpp.o CMakeFiles/2dgame_run.dir/EntityManager.cpp.o CMakeFiles/2dgame_run.dir/Game.cpp.o CMakeFiles/2dgame_run.dir/Main.cpp.o  -o 2dgame_run  -lSDL2 

@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib2dgame_lib.a  CMakeFiles/2dgame_lib.dir/Entity.cpp.o CMakeFiles/2dgame_lib.dir/EntityManager.cpp.o CMakeFiles/2dgame_lib.dir/Game.cpp.o CMakeFiles/2dgame_lib.dir/Main.cpp.o
-/usr/bin/ranlib lib2dgame_lib.a

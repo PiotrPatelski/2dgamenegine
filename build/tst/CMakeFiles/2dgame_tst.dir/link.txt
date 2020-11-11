@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/2dgame_tst.dir/gameTest.cpp.o CMakeFiles/2dgame_tst.dir/main.cpp.o  -o 2dgame_tst  ../src/lib2dgame_lib.a ../lib/libgtest.a -lSDL2 -lpthread 

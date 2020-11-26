@@ -1,7 +1,7 @@
 #include <iostream>
-#include "./Constants.h"
-#include "./Game.h"
-#include "./Components/TransformComponent.h"
+#include "Constants.h"
+#include "Game.h"
+#include "Components/TransformComponent.h"
 #include "../lib/glm/glm.hpp"
 
 EntityManager manager;
@@ -60,8 +60,12 @@ void Game::Initialize(int width, int height)
 
 void Game::LoadLevel(int levelNumber)
 {
-    Entity &newEntity(manager.AddEntity("projectile"));
-    newEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+  std::shared_ptr<Entity> newEntity (manager.AddEntity("projectile"));
+  newEntity->AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+
+  
+  std::shared_ptr<Entity> anotherEntity (manager.AddEntity("projectile2"));
+  anotherEntity->AddComponent<TransformComponent>(800, 0, -20, 20, 32, 32, 1);
 }
 
 void Game::ProcessInput()

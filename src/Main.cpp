@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
-#include "./Constants.h"
-#include "./Game.h"
+#include "Constants.h"
+#include "Game.h"
 
 int main(int argc, char *args[]) {
     std::unique_ptr<Game> game = std::make_unique<Game>();

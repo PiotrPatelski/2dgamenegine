@@ -1,4 +1,4 @@
-#include "./EntityManager.h"
+#include "EntityManager.h"
 
 void EntityManager::ClearData() {
     for (auto& entity: entities) {
@@ -20,15 +20,14 @@ void EntityManager::Render() {
     for (auto& entity: entities) {
         entity->Render();
     }
+};
+    
+std::shared_ptr<Entity> EntityManager::AddEntity(std::string entityName) {
+    entities.emplace_back(std::make_shared<Entity>(*this, entityName));
+    return entities.back();
 }
 
-Entity& EntityManager::AddEntity(std::string entityName) {
-    Entity *entity = new Entity(*this, entityName);
-    entities.emplace_back(entity);
-    return *entity;
-}
-
-std::vector<Entity*> EntityManager::GetEntities() const {
+std::vector<std::shared_ptr<Entity>> EntityManager::GetEntities() const {
     return entities;
 }
 

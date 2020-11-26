@@ -12,5 +12,5 @@ include_directories(lib/lua)
 add_subdirectory(lib/glm)
 add_subdirectory(src)
 add_subdirectory(tst)
-add_subdirectory(lib/googletest)
+add_subdirectory(googletest)
 

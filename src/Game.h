@@ -1,13 +1,12 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <memory>
-#include "./Entity.h"
-#include "./Component.h"
-#include "./EntityManager.h"
+#include "Entity.h"
+#include "Component.h"
+#include "EntityManager.h"
 
 class Game {
     private:
@@ -27,4 +26,3 @@ class Game {
         void Destroy();
 };
 
-#endif

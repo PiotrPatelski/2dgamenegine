@@ -3,9 +3,11 @@ project(2dgame)
 
 set(CMAKE_CXX_STANDARD 14)
 
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+find_package(PkgConfig REQUIRED)
+#find_package(SDL2 REQUIRED)
+pkg_check_modules(SDL2 REQUIRED sdl2)
 
+include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(src)
 include_directories(lib/lua)
 

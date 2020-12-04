@@ -1,14 +1,17 @@
-#include <iostream>
-#include "Constants.h"
 #include "Game.h"
-#include "Components/TransformComponent.h"
+
+#include <algorithm>
+#include <iostream>
+
 #include "../lib/glm/glm.hpp"
+#include "Components/TransformComponent.h"
+#include "Constants.h"
 
 EntityManager manager;
 std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> Game::renderer(nullptr, SDL_DestroyRenderer);
 
-Game::Game()
-: window(nullptr, SDL_DestroyWindow)//, renderer(nullptr, SDL_DestroyRenderer)
+Game::Game() : window(nullptr,
+                      SDL_DestroyWindow) //, renderer(nullptr, SDL_DestroyRenderer)
 {
     this->isRunning = false;
 }
@@ -30,15 +33,7 @@ void Game::Initialize(int width, int height)
         return;
     }
     window.reset(
-            SDL_CreateWindow(
-            NULL,
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            width,
-            height,
-            SDL_WINDOW_BORDERLESS));
-    
-    
+        SDL_CreateWindow(NULL, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_BORDERLESS));
 
     if (!window)
     {
@@ -60,12 +55,21 @@ void Game::Initialize(int width, int height)
 
 void Game::LoadLevel(int levelNumber)
 {
-  std::shared_ptr<Entity> newEntity (manager.AddEntity("projectile"));
-  newEntity->AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+    std::shared_ptr<Entity> newEntity(manager.AddEntity("projectile"));
+    newEntity->AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 
-  
-  std::shared_ptr<Entity> anotherEntity (manager.AddEntity("projectile2"));
-  anotherEntity->AddComponent<TransformComponent>(800, 0, -20, 20, 32, 32, 1);
+    std::shared_ptr<Entity> anotherEntity(manager.AddEntity("projectile2"));
+    anotherEntity->AddComponent<TransformComponent>(800, 0, -20, 20, 32, 32, 1);
+
+    std::shared_ptr<Entity> yetAnotherEntity(manager.AddEntity("projectile3"));
+    anotherEntity->AddComponent<TransformComponent>(400, 0, 0, 20, 32, 32, 1);
+
+    std::shared_ptr<Entity> andYetAnotherEntity(manager.AddEntity("projectile4"));
+    anotherEntity->AddComponent<TransformComponent>(450, 600, 0, -20, 32, 32, 1);
+
+    ListEntities();
+    ListComponents();
+      
 }
 
 void Game::ProcessInput()
@@ -74,20 +78,17 @@ void Game::ProcessInput()
     SDL_PollEvent(&event);
     switch (event.type)
     {
-    case SDL_QUIT:
-    {
+    case SDL_QUIT: {
         isRunning = false;
         break;
     }
-    case SDL_KEYDOWN:
-    {
+    case SDL_KEYDOWN: {
         if (event.key.keysym.sym == SDLK_ESCAPE)
         {
             isRunning = false;
         }
     }
-    default:
-    {
+    default: {
         break;
     }
     }
@@ -131,4 +132,21 @@ void Game::Destroy()
     SDL_DestroyRenderer(renderer.get());
     SDL_DestroyWindow(window.get());
     SDL_Quit();
+}
+
+void Game::ListEntities()
+{
+    auto levelEntities = manager.GetEntities();
+    std::for_each(levelEntities.begin(), levelEntities.end(),
+                  [](auto entity) { std::cout << entity->name << std::endl; });
+}
+
+void Game::ListComponents()
+{
+    auto levelEntities = manager.GetEntities();
+    std::for_each(levelEntities.begin(), levelEntities.end(), [](auto entity) {
+      auto components = entity->GetComponents();
+        std::for_each(components.begin(), components.end(),
+                      [](auto component) { std::cout << "component" << std::endl; });
+    });
 }
